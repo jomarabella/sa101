@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+         
+    <title>Login & Registration Form</title> 
+    <script>
+        $(document).ready(function(){
+            $("#button").click(function(){
+            var fname= $("#Firstname").val();
+            var Lname= $("#Lastname").val();
+            var uname= $("#username").val();
+            var password= $("#pass").val();
+            var conpass= $("#conpass").val();
+
+            const captchaResponse = grecaptcha.getResponse(); 
+
+              //*to get all elements of all data that you input
+            var name = document.getElementById("Firstname").value;
+            var Lname = document.getElementById("Lastname").value;
+            var uname = document.getElementById("username").value;
+            var password = document.getElementById("pass").value;
+            
+          
+                    if(fname == ""){
+                        alert("Your Firstname is Empty Try Again!");
+                    }
+                    else if (Lname == ""){
+                        alert("Your Lastname is Empty Try Again!");
+                    }
+                    
+                    else if (uname == ""){
+                        alert("Your Username is Empty Try Again!");
+                    }
+                    else if (password == "") {
+                        alert("Your Password is Empty Try Again!");
+                    }
+                    else if (conpass == "") {
+                        alert("Your Password is Empty Try Again!");
+                    }
+                    else if (!captchaResponse.length > 0){
+                            alert("Captcha is Field to fill in");
+                    }
+                    //*this condition is to compare the password and confirm password if both are satisfied you can automatically log in
+                    else if (conpass != password){
+                        alert("Your Password doesn't match is Empty Try Again!");
+                    }
+                    else{
+                        alert("login successfully");
+                        //*to set all values in the localstorage in getting the elementId 
+                                localStorage.setItem("Firstname", name);
+                                localStorage.setItem("Lastname", Lname);
+                                localStorage.setItem("username", uname);
+                                localStorage.setItem("pass", password);
+                    }
+        });
+        });
+        </script>
+ 
+</head>
+<body>
+    
+    <div class="container">
+        <div class="form">
+                    <div class="form signup">
+                        <span class="title">Registration</span>
+                        <form action="register.html"  method="post">
+                            <div class="input-field">
+                                <input type="text" id="Firstname" name="fname"  placeholder="Firstname" required>
+                                <i class="uil uil-user"></i>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" id="Lastname" name="lname"  placeholder="Lastname" required>
+                                <i class="uil uil-envelope icon"></i>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" id="username" name="uname"  placeholder="username" required>
+                                <i class="uil uil-envelope icon"></i>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" id="pass" placeholder="Create a password" required>
+                                <i class="uil uil-lock icon"></i>
+                                
+                            </div>
+                            <div class="input-field">
+                                <input type="password" id="conpass" placeholder="Confirm your password" required>
+                                <i class="uil uil-lock icon"></i>
+                                
+                            </div>
+                        </br>
+                        <div class="g-recaptcha" data-sitekey="6LdqaL4oAAAAAHsOBRYrOii5SkckNvx4ou_pByyW" id="captcha"></div>
+                            <div class="input buttons">
+                                <input type="button" id="button" value="Signup">
+                            </div>
+                        </form>
+                        <div class="login-signup">
+                            
+                            <span class="text">Already have an account?
+                                <a href="loginform.html" class="text login-link">Login Now</a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <script src="script.js"></script> 
+</body>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    body{
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #4070f4;
+    }
+    .container{
+        position: relative;
+        max-width: 400px;
+        width: 100%;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin: 0 15px;
+    }
+   
+    .container .form .title{
+        position: relative;
+        font-size: 21px;
+        font-weight: 300;
+    }
+    .form .title::before{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 30px;
+        border-radius: 5px;
+    }
+    .form .input-field{
+        position: relative;
+        height: 30px;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .input-field input{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding: 0 25px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        border-bottom: 2px solid #ccc;
+        border-top: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+    .input-field input:is(:focus, :valid){
+        border-bottom-color: #4070f4;
+    }
+    .input-field i{
+        position: absolute;
+        top: 30%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 23px;
+        transition: all 0.2s ease;
+    }
+    .input-field input:is(:focus, :valid) ~ i{
+        color: #4070f4;
+    }
+    .input-field i.icon{
+        left: 0;
+    }
+
+    .form .text{
+        color: #333;
+        font-size: 14px;
+    }
+    .form a.text{
+        color: #4070f4;
+        text-decoration: none;
+    }
+    .form a:hover{
+        text-decoration: underline;
+    }
+    .form .button{
+        margin-top: 100px;
+    }
+    .form .buttons input{
+    border: none;
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    padding: 10px 150px 10px 150px;
+    background-color: #1043b9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px;
+    border-radius: 10px;
+    }
+    .buttons input:hover{
+        background-color: #0bd115;
+    }
+    .form .login-signup{
+        margin-top: 10px;
+        text-align: center;
+    }
+    </style>
+</html>
